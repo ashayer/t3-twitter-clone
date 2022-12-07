@@ -11,9 +11,15 @@ import {
   RiBookmarkLine,
   RiFileListLine,
   RiUserLine,
+  RiHeart3Line,
+  RiChat1Line,
 } from "react-icons/ri";
+import { RxUpload } from "react-icons/rx";
 import { BiHash } from "react-icons/bi";
 import { CgMoreO } from "react-icons/cg";
+import { HiOutlineSparkles } from "react-icons/hi";
+import { AiOutlineRetweet } from "react-icons/ai";
+import Image from "next/image";
 const Home: NextPage = () => {
   const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
 
@@ -26,11 +32,9 @@ const Home: NextPage = () => {
       </Head>
       <main className="mx-auto grid h-screen w-10/12 grid-cols-3 border-2 border-red-500">
         <LeftSide />
-        <section className="border-2">
-          <Tweet />
-        </section>
-        <section className="w-1/2 border-2">
-          <p>Trending</p>
+        <Middle />
+        <section className="w-1/2 border-l border-slate-700 text-white">
+          <p></p>
         </section>
       </main>
     </>
@@ -39,7 +43,7 @@ const Home: NextPage = () => {
 
 const LeftSide = () => {
   return (
-    <section className="flex w-2/5 flex-col justify-self-end border-2 text-white">
+    <section className="flex w-1/2 flex-col justify-self-end border-r border-slate-700 text-white">
       <Link href="/home" className="my-1">
         <span className="rounded-3xl border-slate-400 py-3 pl-4 text-xl  ">
           <SiTwitter className="mr-4 inline-block h-6 w-6" />
@@ -93,18 +97,72 @@ const LeftSide = () => {
           More
         </button>
       </Link>
-      <button className=" mx-2 mr-8 mt-6 rounded-3xl bg-blue-400 py-3 text-xl hover:bg-blue-500">
+      <button className=" mx-2 mr-8 mt-6 rounded-3xl bg-sky-500 py-3 text-xl hover:bg-sky-600">
         Tweet
       </button>
     </section>
   );
 };
 
+const Middle = () => {
+  return (
+    <section>
+      <div className="sticky flex items-center justify-between bg-opacity-50 py-4 pl-4 text-xl text-white">
+        <span>Home</span>
+        <HiOutlineSparkles className="mr-4 h-6 w-6" />
+      </div>
+      <div className="">
+        <Tweet />
+      </div>
+    </section>
+  );
+};
+
 const Tweet = () => {
   return (
-    <div>
-      <p>Username</p>
-      <p>Text</p>
+    <div className="flex border-b border-slate-700 p-4">
+      <div className="h-100 ">
+        <Image
+          src="https://randomuser.me/api/portraits/lego/8.jpg"
+          alt="User Image"
+          width={50}
+          height={50}
+          className="rounded-full"
+        />
+      </div>
+      <div className="ml-4 flex w-full flex-col">
+        <p className="font-bold text-white">Username</p>
+        <p className="text-white">
+          Textjkasdflkjasdhnl fkjsadhflksjadhfnasldkjfh lskdajfh lksjdhf lksdjhf
+          a;lsdkf ;lsdkf;l sdkf'; lksd;lfksd;l fksd;lf slkdjfl;k sdjfklsadj
+          flaksdjfh sldkj ksjadhflkajsd hfkajsd Textjkasdflkjasdhnl
+          fkjsadhflksjadhfnasldkjfh lskdajfh lksjdhf lksdjhf a;lsdkf ;lsdkf;l
+          sdkf'; lksd;lfksd;l fksd;lf slkdjfl;k sdjfklsadj flaksdjfh sldkj
+          ksjadhflkajsd hfkajsd Textjkasdflkjasdhnl fkjsadhflksjadhfnasldkjfh
+          lskdajfh lksjdhf lksdjhf a;lsdkf ;lsdkf;l sdkf'; lksd;lfksd;l fksd;lf
+          slkdjfl;k sdjfklsadj flaksdjfh sldkj ksjadhflkajsd hfkajsd
+        </p>
+        <div className="flex justify-between pt-2 text-slate-600">
+          <button className=" hover:text-sky-500 ">
+            <RiChat1Line className="mr-2 inline-block h-7 w-7 rounded-full p-1 hover:bg-sky-900 hover:bg-opacity-30" />
+            25
+          </button>
+
+          <button className="hover:text-green-500">
+            <AiOutlineRetweet className="mr-2 inline-block h-7 w-7 rounded-full p-1 hover:bg-green-900 hover:bg-opacity-30" />
+            24
+          </button>
+
+          <button className="hover:text-red-500">
+            <RiHeart3Line className="mr-2 inline-block h-7 w-7 rounded-full p-1 hover:bg-red-900 hover:bg-opacity-30" />
+            24
+          </button>
+
+          <button className="mr-16 hover:text-sky-500 ">
+            <RxUpload className="mr-2 inline-block h-7 w-7 rounded-full p-1 hover:bg-sky-900 hover:bg-opacity-30" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
