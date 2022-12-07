@@ -14,6 +14,7 @@ import {
   RiHeart3Line,
   RiChat1Line,
   RiMoreLine,
+  RiSearch2Line,
 } from "react-icons/ri";
 import { RxUpload } from "react-icons/rx";
 import { BiHash } from "react-icons/bi";
@@ -34,9 +35,7 @@ const Home: NextPage = () => {
       <main className="mx-auto grid h-screen w-10/12 grid-cols-3">
         <LeftSide />
         <Middle />
-        <section className="w-1/2 border-l border-slate-700 text-white">
-          <p></p>
-        </section>
+        <RightSide />
       </main>
     </>
   );
@@ -119,6 +118,27 @@ const LeftSide = () => {
           </div>
           <RiMoreLine className="mr-4 inline-block h-10 w-10 text-white" />
         </button>
+      </section>
+    </div>
+  );
+};
+
+const RightSide = () => {
+  return (
+    <div className="w-1/2 border-l border-slate-700">
+      <section className="sticky top-0  mx-4 flex h-screen flex-col justify-between">
+        <div className="flex flex-col  text-white">
+          <div className="my-2">
+            <RiSearch2Line className="absolute left-3 top-4 h-6 w-6 text-zinc-500 " />
+            <input
+              type="text"
+              name="search"
+              id="search"
+              placeholder="Search Twitter"
+              className="rounded-full bg-gray-800 py-2 pl-12 pr-5 outline-none placeholder:text-zinc-500  focus:border-sky-500 focus:outline-sky-500"
+            />
+          </div>
+        </div>
       </section>
     </div>
   );
