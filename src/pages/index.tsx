@@ -23,8 +23,21 @@ import { CgMoreO } from "react-icons/cg";
 import { HiOutlineSparkles } from "react-icons/hi";
 import { AiOutlineRetweet } from "react-icons/ai";
 import Image from "next/image";
+
 const Home: NextPage = () => {
-  const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
+  const { data: session, status } = useSession();
+
+  if (status === "loading") return <div>Loading..</div>;
+
+  if (status === "unauthenticated") {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center  text-white">
+        <button onClick={() => signIn("google")} className="border-2 p-4">
+          Sign In To Use
+        </button>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -36,16 +49,31 @@ const Home: NextPage = () => {
       <main className="mx-auto flex h-screen w-screen w-11/12 sm:hidden">
         <MiddleMobile />
       </main>
-      {/* <main className="mx-auto hidden h-screen w-4/5 sm:flex xl:hidden">
-        <LeftSideSmall />
-        <Middle />
-      </main> */}
       <main className="mx-auto hidden h-screen w-11/12 sm:grid sm:grid-cols-[20%_80%] lg:grid-cols-[10%_60%_30%] xl:grid-cols-[10%_70%_20%] 2xl:w-10/12 2xl:grid-cols-[35%_40%_20%]">
         <LeftSide />
-        <Middle />
+        <Middle userId={session?.user?.id as string} />
         <RightSide />
       </main>
     </>
+  );
+};
+
+const Middle = ({ userId }: { userId: string }) => {
+  const tweets = trpc.tweets.getTweets.useQuery({ userId });
+
+  if (tweets.isLoading) return <div>Loading..</div>;
+
+  console.log(tweets.data);
+  return (
+    <section>
+      <>
+        <div className="sticky top-0 flex  items-center justify-between bg-black bg-opacity-75 py-4 pl-4 text-xl text-white backdrop-blur-xl">
+          <span>Home</span>
+          <HiOutlineSparkles className="mr-4 h-6 w-6" />
+        </div>
+        {tweets.data && <div></div>}
+      </>
+    </section>
   );
 };
 
@@ -223,22 +251,6 @@ const MiddleMobile = () => {
       </div>
       <div className="sticky bottom-0 ">
         <LeftSideMobile />
-      </div>
-    </section>
-  );
-};
-
-const Middle = () => {
-  return (
-    <section>
-      <div className="sticky top-0 flex  items-center justify-between bg-black bg-opacity-75 py-4 pl-4 text-xl text-white backdrop-blur-xl">
-        <span>Home</span>
-        <HiOutlineSparkles className="mr-4 h-6 w-6" />
-      </div>
-      <div className="">
-        {Array(...Array(20)).map((x, i) => {
-          return <Tweet key={i} />;
-        })}
       </div>
     </section>
   );
