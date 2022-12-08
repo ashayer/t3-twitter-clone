@@ -36,11 +36,11 @@ const Home: NextPage = () => {
       <main className="mx-auto flex h-screen w-screen sm:hidden">
         <MiddleMobile />
       </main>
-      <main className="mx-auto hidden h-screen w-4/5 sm:flex xl:hidden">
+      {/* <main className="mx-auto hidden h-screen w-4/5 sm:flex xl:hidden">
         <LeftSideSmall />
         <Middle />
-      </main>
-      <main className="mx-auto hidden h-screen w-11/12 xl:grid xl:grid-cols-3">
+      </main> */}
+      <main className="mx-auto hidden h-screen w-11/12 sm:grid sm:grid-cols-[20%_80%] lg:grid-cols-[10%_60%_30%] xl:grid-cols-[10%_70%_20%] 2xl:w-10/12 2xl:grid-cols-[30%_40%_20%]">
         <LeftSide />
         <Middle />
         <RightSide />
@@ -92,166 +92,87 @@ const LeftSideMobile = () => {
   );
 };
 
-const LeftSideSmall = () => {
-  return (
-    <section className="flex flex-col items-center gap-y-4 bg-black text-xl text-white">
-      <Link href="/" className="my-4">
-        <span className="rounded-full border-slate-400 py-3 pl-4 text-xl  ">
-          <SiTwitter className="mr-4 inline-block h-6 w-6" />
-        </span>
-      </Link>
-      <Link
-        href="/"
-        className="rounded-full border-slate-400 py-2 text-xl hover:bg-zinc-800"
-      >
-        <button className="">
-          <RiHome8Fill className="inline-block h-6 w-6" />
-        </button>
-      </Link>
-
-      <Link
-        href="/"
-        className="rounded-full border-slate-400 py-2 text-xl hover:bg-zinc-800"
-      >
-        <button>
-          <RiSearch2Line className="inline-block h-6 w-6" />
-        </button>
-      </Link>
-      <Link
-        href="/"
-        className="rounded-full border-slate-400 py-2   text-xl hover:bg-zinc-900"
-      >
-        <button>
-          <RiNotification2Line className="inline-block h-6 w-6" />
-        </button>
-      </Link>
-      <Link
-        href="/"
-        className="rounded-full border-slate-400 py-2   text-xl hover:bg-zinc-900"
-      >
-        <button>
-          <RiMailLine className="inline-block h-6 w-6" />
-        </button>
-      </Link>
-      <Link
-        href="/"
-        className="rounded-full border-slate-400 py-2   text-xl hover:bg-zinc-900"
-      >
-        <button>
-          <RiBookmarkLine className="inline-block h-6 w-6" />
-          <span className="hidden">Home</span>
-        </button>
-      </Link>
-      <Link
-        href="/"
-        className="rounded-full border-slate-400 py-2   text-xl hover:bg-zinc-900"
-      >
-        <button>
-          <RiFileListLine className="inline-block h-6 w-6" />
-          <span className="hidden">Home</span>
-        </button>
-      </Link>
-      <Link
-        href="/"
-        className="rounded-full border-slate-400 py-2   text-xl hover:bg-zinc-900"
-      >
-        <button>
-          <RiUserLine className="inline-block h-6 w-6" />
-          <span className="hidden">Home</span>
-        </button>
-      </Link>
-      <Link
-        href="/"
-        className="rounded-full border-slate-400 py-3  text-xl hover:bg-zinc-900"
-      >
-        <button>
-          <CgMoreO className="inline-block h-6 w-6" />
-          <span className="hidden">Home</span>
-        </button>
-      </Link>
-      <button className="rounded-full bg-sky-500 text-xl hover:bg-sky-600">
-        <RiQuillPenLine className="m-4 h-6 w-6 rounded-full" />
-      </button>
-    </section>
-  );
-};
-
 const LeftSide = () => {
   return (
     <div className="w-2/3 justify-self-end border-r border-slate-700 2xl:w-2/5">
       <section className="sticky top-0 flex h-screen flex-col justify-between">
-        <div className="flex  flex-col  text-white">
+        <div className="flex flex-col items-center gap-y-8 text-white 2xl:items-start">
           <Link href="/home" className="my-1">
-            <span className="rounded-3xl border-slate-400 py-3 pl-4 text-xl  ">
-              <SiTwitter className="mr-4 inline-block h-6 w-6" />
+            <span className="rounded-3xl border-slate-400 text-xl">
+              <SiTwitter className="inline-block h-6 w-6" />
             </span>
           </Link>
-          <Link href="/home" className="my-1">
-            <button className="rounded-3xl border-slate-400 py-3 pl-4  pr-6 text-xl  hover:bg-zinc-900">
-              <RiHome8Fill className="mr-4 inline-block h-6 w-6" />
-              Home
+          <Link href="/home" className=" my-1">
+            <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
+              <RiHome8Fill className="inline-block h-6 w-6" />
+              <span className="ml-4 hidden 2xl:inline-block">Home</span>
             </button>
           </Link>
           <Link href="/home" className="my-1">
-            <button className="rounded-3xl border-slate-400 py-3 pl-4  pr-6 text-xl  hover:bg-zinc-900">
-              <BiHash className="mr-4 inline-block h-6 w-6" />
-              Explore
+            <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
+              <BiHash className="inline-block h-6 w-6" />
+              <span className="ml-4 hidden 2xl:inline-block">Explore</span>
             </button>
           </Link>
           <Link href="/home" className="my-1">
-            <button className="rounded-3xl border-slate-400 py-3 pl-4  pr-6 text-xl  hover:bg-zinc-900">
-              <RiNotification2Line className="mr-4 inline-block h-6 w-6" />
-              Notifications
+            <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
+              <RiNotification2Line className="inline-block h-6 w-6" />
+              <span className="ml-4 hidden 2xl:inline-block">
+                Notifications
+              </span>
             </button>
           </Link>
           <Link href="/home" className="my-1">
-            <button className="rounded-3xl border-slate-400 py-3 pl-4  pr-6 text-xl  hover:bg-zinc-900">
-              <RiMailLine className="mr-4 inline-block h-6 w-6" />
-              Messages
+            <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
+              <RiMailLine className="inline-block h-6 w-6" />
+              <span className="ml-4 hidden 2xl:inline-block">Messages</span>
             </button>
           </Link>
           <Link href="/home" className="my-1">
-            <button className="rounded-3xl border-slate-400 py-3 pl-4  pr-6 text-xl  hover:bg-zinc-900">
-              <RiBookmarkLine className="mr-4 inline-block h-6 w-6" />
-              Bookmarks
+            <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
+              <RiBookmarkLine className="inline-block h-6 w-6" />
+              <span className="ml-4 hidden 2xl:inline-block">Bookmarks</span>
             </button>
           </Link>
           <Link href="/home" className="my-1">
-            <button className="rounded-3xl border-slate-400 py-3 pl-4  pr-6 text-xl  hover:bg-zinc-900">
-              <RiFileListLine className="mr-4 inline-block h-6 w-6" />
-              Lists
+            <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
+              <RiFileListLine className="inline-block h-6 w-6" />
+              <span className="ml-4 hidden 2xl:inline-block">Lists</span>
             </button>
           </Link>
           <Link href="/home" className="my-1">
-            <button className="rounded-3xl border-slate-400 py-3 pl-4  pr-6 text-xl  hover:bg-zinc-900">
-              <RiUserLine className="mr-4 inline-block h-6 w-6" />
-              Profile
+            <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
+              <RiUserLine className="inline-block h-6 w-6" />
+              <span className="ml-4 hidden 2xl:inline-block">Profile</span>
             </button>
           </Link>
           <Link href="/home" className="my-1">
-            <button className="rounded-3xl border-slate-400 py-3 pl-4  pr-6 text-xl  hover:bg-zinc-900">
-              <CgMoreO className="mr-4 inline-block h-6 w-6" />
-              More
+            <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
+              <CgMoreO className="inline-block h-6 w-6" />
+              <span className="ml-4 hidden 2xl:inline-block">More</span>
             </button>
           </Link>
-          <button className=" mx-2 mr-8 mt-6 rounded-3xl bg-sky-500 py-3 text-xl hover:bg-sky-600">
+          <button className="mr-4 hidden w-11/12 rounded-3xl bg-sky-500 p-3 text-xl hover:bg-sky-600 2xl:block">
             Tweet
           </button>
+          <button className="rounded-full bg-sky-500 p-4 text-xl hover:bg-sky-600 2xl:hidden">
+            <RiQuillPenLine />
+          </button>
         </div>
-        <button className="m-4 flex rounded-full border-slate-700 p-4 hover:bg-zinc-900">
+        <button className="w-100 flex items-center rounded-full border-slate-700 p-4 hover:bg-zinc-900">
           <div className="h-100 ">
             <Image
               src="https://randomuser.me/api/portraits/lego/8.jpg"
               alt="User Image"
               width={50}
               height={50}
-              className="rounded-full"
+              className=" rounded-full border"
             />
           </div>
-          <div className="ml-4 flex w-full font-bold text-white">
-            <p>User</p>
+          <div className="ml-2 hidden w-10/12 overflow-x-hidden text-ellipsis text-white 2xl:block">
+            <p className="">fhrasdkfjasdlkjfajsdklasjd;flk</p>
           </div>
-          <RiMoreLine className="mr-4 inline-block h-10 w-10 text-white" />
+          <RiMoreLine className="ml-4 hidden h-8 w-8 text-white 2xl:block" />
         </button>
       </section>
     </div>
@@ -260,7 +181,7 @@ const LeftSide = () => {
 
 const RightSide = () => {
   return (
-    <div className="w-1/2 border-l border-slate-700">
+    <div className="hidden w-1/2 border-l border-slate-700 lg:block xl:col-span-1 xl:block">
       <section className="sticky top-0  mx-4 flex h-screen flex-col justify-between">
         <div className="flex flex-col  text-white">
           <div className="my-2">
@@ -281,9 +202,9 @@ const RightSide = () => {
 
 const MiddleMobile = () => {
   return (
-    <section>
-      <div className="sticky top-0 flex w-screen justify-between bg-black bg-opacity-75 py-4 pl-4 text-xl text-white backdrop-blur-xl">
-        <button className="flex  rounded-full border-slate-700 pr-4 pb-4 hover:bg-zinc-900">
+    <section className="border-2">
+      <div className="top-0 flex justify-between bg-black bg-opacity-75 py-4 pl-4 text-xl text-white backdrop-blur-xl">
+        <button className="flex rounded-full border-slate-700 pr-4 pb-4 hover:bg-zinc-900">
           <Image
             src="https://randomuser.me/api/portraits/lego/8.jpg"
             alt="User Image"
@@ -295,12 +216,12 @@ const MiddleMobile = () => {
         </button>
         <HiOutlineSparkles className="mr-4 h-6 w-6" />
       </div>
-      <div className="">
+      <div>
         {Array(...Array(20)).map((x, i) => {
           return <Tweet key={i} />;
         })}
       </div>
-      <div className="sticky bottom-0">
+      <div className="sticky bottom-0 ">
         <LeftSideMobile />
       </div>
     </section>
