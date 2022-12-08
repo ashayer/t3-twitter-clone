@@ -108,13 +108,13 @@ const LeftSide = () => {
               <span className="ml-4 hidden 2xl:inline-block">Home</span>
             </button>
           </Link>
-          <Link href="/home" className="my-1">
+          <Link href="/" className="my-1">
             <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
               <BiHash className="inline-block h-6 w-6" />
               <span className="ml-4 hidden 2xl:inline-block">Explore</span>
             </button>
           </Link>
-          <Link href="/home" className="my-1">
+          <Link href="/" className="my-1">
             <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
               <RiNotification2Line className="inline-block h-6 w-6" />
               <span className="ml-4 hidden 2xl:inline-block">
@@ -122,31 +122,31 @@ const LeftSide = () => {
               </span>
             </button>
           </Link>
-          <Link href="/home" className="my-1">
+          <Link href="/" className="my-1">
             <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
               <RiMailLine className="inline-block h-6 w-6" />
               <span className="ml-4 hidden 2xl:inline-block">Messages</span>
             </button>
           </Link>
-          <Link href="/home" className="my-1">
+          <Link href="/" className="my-1">
             <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
               <RiBookmarkLine className="inline-block h-6 w-6" />
               <span className="ml-4 hidden 2xl:inline-block">Bookmarks</span>
             </button>
           </Link>
-          <Link href="/home" className="my-1">
+          <Link href="/" className="my-1">
             <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
               <RiFileListLine className="inline-block h-6 w-6" />
               <span className="ml-4 hidden 2xl:inline-block">Lists</span>
             </button>
           </Link>
-          <Link href="/home" className="my-1">
+          <Link href="/" className="my-1">
             <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
               <RiUserLine className="inline-block h-6 w-6" />
               <span className="ml-4 hidden 2xl:inline-block">Profile</span>
             </button>
           </Link>
-          <Link href="/home" className="my-1">
+          <Link href="/" className="my-1">
             <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
               <CgMoreO className="inline-block h-6 w-6" />
               <span className="ml-4 hidden 2xl:inline-block">More</span>
