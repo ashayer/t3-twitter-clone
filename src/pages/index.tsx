@@ -40,7 +40,7 @@ const Home: NextPage = () => {
         <LeftSideSmall />
         <Middle />
       </main> */}
-      <main className="mx-auto hidden h-screen w-11/12 sm:grid sm:grid-cols-[20%_80%] lg:grid-cols-[10%_60%_30%] xl:grid-cols-[10%_70%_20%] 2xl:w-10/12 2xl:grid-cols-[30%_40%_20%]">
+      <main className="mx-auto hidden h-screen w-11/12 sm:grid sm:grid-cols-[20%_80%] lg:grid-cols-[10%_60%_30%] xl:grid-cols-[10%_70%_20%] 2xl:w-10/12 2xl:grid-cols-[35%_40%_20%]">
         <LeftSide />
         <Middle />
         <RightSide />
@@ -102,7 +102,7 @@ const LeftSide = () => {
               <SiTwitter className="inline-block h-6 w-6" />
             </span>
           </Link>
-          <Link href="/home" className=" my-1">
+          <Link href="/home" className="my-1">
             <button className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900">
               <RiHome8Fill className="inline-block h-6 w-6" />
               <span className="ml-4 hidden 2xl:inline-block">Home</span>
