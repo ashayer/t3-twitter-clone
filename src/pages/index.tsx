@@ -27,6 +27,7 @@ import { trpc } from "../utils/trpc";
 import type { Session } from "next-auth";
 import { useState } from "react";
 import { Tweet } from "@prisma/client";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const Home: NextPage = () => {
   const { data: sessionData, status } = useSession();
@@ -67,6 +68,8 @@ const TweetFeed = ({ sessionData }: { sessionData: Session }) => {
 
   const [tweetText, setTweetText] = useState("");
   const [tweetLength, setTweetLength] = useState(0);
+  const [parent, enableAnimations] =
+    useAutoAnimate<HTMLDivElement>(/* optional config */);
 
   console.log(tweets.data);
 
@@ -125,11 +128,11 @@ const TweetFeed = ({ sessionData }: { sessionData: Session }) => {
         </div>
         <div>
           {tweets.data && (
-            <>
+            <div ref={parent}>
               {tweets.data.map((tweet, index) => (
                 <Tweet key={index} tweetInfo={tweet} />
               ))}
-            </>
+            </div>
           )}
         </div>
       </>
