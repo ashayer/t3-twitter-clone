@@ -2,19 +2,17 @@ import { z } from "zod";
 
 import { router, publicProcedure } from "../trpc";
 
-export const tweetsRouter = router({
-  createTweet: publicProcedure
+export const exampleRouter = router({
+  hello: publicProcedure
     .input(
       z.object({
+        text: z.string(),
         createdByName: z.string(),
         createdById: z.string(),
         createdByImage: z.string(),
-        text: z.string().max(256).min(1),
       })
     )
     .mutation(async ({ input, ctx }) => {
-      console.log(ctx);
-      console.log(input);
       const tweet = await ctx.prisma.tweet.create({
         data: {
           createdById: input.createdById,
@@ -23,16 +21,12 @@ export const tweetsRouter = router({
           text: input.text,
         },
       });
-      console.log(tweet);
     }),
-  getTweets: publicProcedure
-    .input(z.object({ userId: z.string() }))
-    .query(async ({ input, ctx }) => {
-      const tweets = await ctx.prisma.tweet.findMany({
-        where: {
-          createdById: input.userId,
-        },
-      });
-      return tweets;
-    }),
+  getAll: publicProcedure.query(async ({ ctx }) => {
+    return ctx.prisma.tweet.findMany({
+      orderBy: {
+        createdAt: "asc",
+      },
+    });
+  }),
 });
