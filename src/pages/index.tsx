@@ -16,6 +16,7 @@ import {
   RiMoreLine,
   RiSearch2Line,
   RiQuillPenLine,
+  RiLogoutBoxLine,
 } from "react-icons/ri";
 import { RxUpload } from "react-icons/rx";
 import { BiHash } from "react-icons/bi";
@@ -28,8 +29,19 @@ import { useState } from "react";
 import { Tweet } from "@prisma/client";
 
 const Home: NextPage = () => {
-  const { data: sessionData } = useSession();
+  const { data: sessionData, status } = useSession();
 
+  if (status === "loading") return <div>Loading..</div>;
+
+  if (status === "unauthenticated") {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center  text-white">
+        <button onClick={() => signIn()} className="border-2 p-4">
+          Sign In To Use
+        </button>
+      </div>
+    );
+  }
   return (
     <>
       <Head>
@@ -38,7 +50,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="mx-auto hidden h-screen w-11/12 sm:grid sm:grid-cols-[20%_80%] lg:grid-cols-[10%_60%_30%] xl:grid-cols-[10%_70%_20%] 2xl:w-10/12 2xl:grid-cols-[35%_40%_20%]">
-        <LeftSideNavigation />
+        <LeftSideNavigation sessionData={sessionData as Session} />
         <TweetFeed sessionData={sessionData as Session} />
         <RightSide />
       </main>
@@ -66,32 +78,35 @@ const TweetFeed = ({ sessionData }: { sessionData: Session }) => {
             <span>Home</span>
             <HiOutlineSparkles className="mr-4 h-6 w-6" />
           </div>
-          <div className="mt-10 flex w-full">
-            <div className="h-100">
-              <Image
-                src="https://randomuser.me/api/portraits/lego/8.jpg"
-                alt="User Image"
-                width={50}
-                height={50}
-                className="rounded-full"
-              />
-            </div>
-            <div className="flex w-full flex-col">
-              <textarea
-                name="tweettext"
-                id="tweettext"
-                placeholder="What's happening?"
-                className="w-full resize-none bg-black p-4 text-zinc-300 outline-none"
-                value={tweetText}
-                onChange={(e) => {
-                  setTweetText(e.target.value);
-                  setTweetLength(e.target.value.length);
-                }}
-              />
-              <div className="flex w-full items-center justify-between p-4">
-                <span className="text-slate-500">{`${tweetLength}/256`}</span>
-                <button
-                  onClick={() => {
+        </div>
+        <div className="mt-10 ml-4 flex w-full">
+          <div className="h-100">
+            <Image
+              src={sessionData.user?.image as string}
+              alt="User Image"
+              width={50}
+              height={50}
+              className="rounded-full"
+            />
+          </div>
+          <div className="flex w-full flex-col">
+            <textarea
+              name="tweettext"
+              id="tweettext"
+              placeholder="What's happening?"
+              className="h-44 w-full resize-none bg-black px-4 text-zinc-300 outline-none"
+              value={tweetText}
+              maxLength={256}
+              onChange={(e) => {
+                setTweetText(e.target.value);
+                setTweetLength(e.target.value.length);
+              }}
+            />
+            <div className="flex w-full items-center justify-between px-4">
+              <span className="text-slate-500">{`${tweetLength}/256`}</span>
+              <button
+                onClick={() => {
+                  if (tweetLength > 0) {
                     createTweet.mutate({
                       createdById: sessionData.user?.id as string,
                       createdByImage: sessionData.user?.image as string,
@@ -99,12 +114,12 @@ const TweetFeed = ({ sessionData }: { sessionData: Session }) => {
                       text: tweetText,
                     });
                     setTweetText("");
-                  }}
-                  className="m-4 w-36 place-self-end rounded-3xl bg-sky-500 p-2 text-xl hover:bg-sky-600"
-                >
-                  Tweet
-                </button>
-              </div>
+                  }
+                }}
+                className="m-4 w-36 place-self-end rounded-3xl bg-sky-500 p-2 text-xl hover:bg-sky-600"
+              >
+                Tweet
+              </button>
             </div>
           </div>
         </div>
@@ -135,31 +150,22 @@ const Tweet = ({ tweetInfo }: { tweetInfo: Tweet }) => {
         />
       </div>
       <div className="ml-4 flex w-full flex-col">
-        <p className="font-bold text-white">User</p>
-        <p className="text-white">
-          Textjkasdflkjasdhnl fkjsadhflksjadhfnasldkjfh lskdajfh lksjdhf lksdjhf
-          a;lsdkf ;lsdkf;l sdkf lksd;lfksd;l fksd;lf slkdjfl;k sdjfklsadj
-          flaksdjfh sldkj ksjadhflkajsd hfkajsd Textjkasdflkjasdhnl
-          fkjsadhflksjadhfnasldkjfh lskdajfh lksjdhf lksdjhf a;lsdkf ;lsdkf;l
-          sdkf lksd;lfksd;l fksd;lf slkdjfl;k sdjfklsadj flaksdjfh sldkj
-          ksjadhflkajsd hfkajsd Textjkasdflkjasdhnl fkjsadhflksjadhfnasldkjfh
-          lskdajfh lksjdhf lksdjhf a;lsdkf ;lsdkf;l sdkf lksd;lfksd;l fksd;lf
-          slkdjfl;k sdjfklsadj flaksdjfh sldkj ksjadhflkajsd hfkajsd
-        </p>
+        <p className="font-bold text-white">{tweetInfo.createdByName}</p>
+        <p className="text-white">{tweetInfo.text}</p>
         <div className="flex justify-between pt-2 text-slate-600">
           <button className=" hover:text-sky-500 ">
             <RiChat1Line className="mr-2 inline-block h-7 w-7 rounded-full p-1 hover:bg-sky-900 hover:bg-opacity-30" />
-            25
+            {tweetInfo.comments}
           </button>
 
           <button className="hover:text-green-500">
             <AiOutlineRetweet className="mr-2 inline-block h-7 w-7 rounded-full p-1 hover:bg-green-900 hover:bg-opacity-30" />
-            24
+            {tweetInfo.retweets}
           </button>
 
           <button className="hover:text-red-500">
             <RiHeart3Line className="mr-2 inline-block h-7 w-7 rounded-full p-1 hover:bg-red-900 hover:bg-opacity-30" />
-            24
+            {tweetInfo.likes}
           </button>
 
           <button className=" hover:text-sky-500 ">
@@ -171,7 +177,7 @@ const Tweet = ({ tweetInfo }: { tweetInfo: Tweet }) => {
   );
 };
 
-const LeftSideNavigation = () => {
+const LeftSideNavigation = ({ sessionData }: { sessionData: Session }) => {
   return (
     <div className="w-2/3 justify-self-end border-r border-slate-700 2xl:w-2/5">
       <section className="sticky top-0 flex h-screen flex-col justify-between">
@@ -231,6 +237,13 @@ const LeftSideNavigation = () => {
               <span className="ml-4 hidden 2xl:inline-block">More</span>
             </button>
           </Link>
+          <button
+            className="rounded-3xl border-slate-400 text-xl  hover:bg-zinc-900"
+            onClick={() => signOut()}
+          >
+            <RiLogoutBoxLine className="inline-block h-6 w-6" />
+            <span className="ml-4 hidden 2xl:inline-block">Logout</span>
+          </button>
           <button className="mr-4 hidden w-11/12 rounded-3xl bg-sky-500 p-3 text-xl hover:bg-sky-600 2xl:block">
             Tweet
           </button>
@@ -241,15 +254,15 @@ const LeftSideNavigation = () => {
         <button className="w-100 flex items-center justify-center rounded-full border-slate-700 p-4 hover:bg-zinc-900">
           <div className="h-100 ">
             <Image
-              src="https://randomuser.me/api/portraits/lego/8.jpg"
+              src={sessionData?.user?.image as string}
               alt="User Image"
               width={50}
               height={50}
-              className="rounded-full border"
+              className="rounded-full"
             />
           </div>
           <div className="ml-2 hidden w-10/12 overflow-x-hidden text-ellipsis text-white 2xl:block">
-            <p className="">fhrasdkfjasdlkjfajsdklasjd;flk</p>
+            <p className="">{sessionData.user?.name}</p>
           </div>
           <RiMoreLine className="ml-4 hidden h-8 w-8 text-white 2xl:block" />
         </button>

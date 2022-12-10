@@ -25,7 +25,7 @@ export const exampleRouter = router({
   getAll: publicProcedure.query(async ({ ctx }) => {
     return ctx.prisma.tweet.findMany({
       orderBy: {
-        createdAt: "asc",
+        createdAt: "desc",
       },
     });
   }),
