@@ -27,6 +27,7 @@ export const exampleRouter = router({
       orderBy: {
         createdAt: "desc",
       },
+      take: 50,
     });
   }),
 });
