@@ -53,7 +53,7 @@ const Home: NextPage = () => {
       <main className="mx-auto h-screen w-11/12 sm:hidden">
         <MobileFeed />
       </main>
-      <main className="mx-auto border hidden h-screen w-11/12 sm:grid sm:grid-cols-[20%_80%] lg:grid-cols-[10%_60%_30%] xl:grid-cols-[10%_70%_20%] 2xl:w-10/12 2xl:grid-cols-[35%_40%_20%]">
+      <main className="mx-auto hidden h-screen w-11/12 sm:grid sm:grid-cols-[20%_80%] lg:grid-cols-[10%_60%_30%] xl:grid-cols-[10%_70%_20%] 2xl:w-10/12 2xl:grid-cols-[35%_40%_20%]">
         <LeftSideNavigation sessionData={sessionData as Session} />
         <TweetFeed sessionData={sessionData as Session} />
         <RightSide />
